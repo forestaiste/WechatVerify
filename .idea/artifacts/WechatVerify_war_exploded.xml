@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="WechatVerify:war exploded">
+    <output-path>$PROJECT_DIR$/target/WechatVerify</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="WechatVerify" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:servelet-api:2.5" />
+          <element id="library" level="project" name="Maven: javax.servlet:jsp-api:2.0" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.4" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/WechatVerify/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="WechatVerify/web/Web" />
+    </root>
+  </artifact>
+</component>
