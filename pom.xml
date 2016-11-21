@@ -17,8 +17,8 @@
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servelet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
     </dependency>
 
     <dependency>
@@ -39,6 +39,21 @@
       <artifactId>xstream</artifactId>
       <version>1.4.9</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>WechatVerify</finalName>
