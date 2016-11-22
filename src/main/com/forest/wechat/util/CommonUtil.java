@@ -1,6 +1,8 @@
 package com.forest.wechat.util;
 
 import com.forest.wechat.pojo.Token;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,94 +20,94 @@ import java.net.URL;
 public class CommonUtil {
     private static Logger log = LoggerFactory.getLogger(CommonUtil.class);
 
-    // Æ¾Ö¤»ñÈ¡£¨GET£©
+    // å‡­è¯è·å–ï¼ˆGETï¼‰
     public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
     /**
-     * ·¢ËÍhttpsÇëÇó
+     * å‘é€httpsè¯·æ±‚
      *
-     * @param requestUrl ÇëÇóµØÖ·
-     * @param requestMethod ÇëÇó·½Ê½£¨GET¡¢POST£©
-     * @param outputStr Ìá½»µÄÊı¾İ
-     * @return JSONObject(Í¨¹ıJSONObject.get(key)µÄ·½Ê½»ñÈ¡json¶ÔÏóµÄÊôĞÔÖµ)
+     * @param requestUrl è¯·æ±‚åœ°å€
+     * @param requestMethod è¯·æ±‚æ–¹å¼ï¼ˆGETã€POSTï¼‰
+     * @param outputStr æäº¤çš„æ•°æ®
+     * @return JSONObject(é€šè¿‡JSONObject.get(key)çš„æ–¹å¼è·å–jsonå¯¹è±¡çš„å±æ€§å€¼)
      */
-//    public static JSONObject httpsRequest(String requestUrl, String requestMethod, String outputStr) {
-//        JSONObject jsonObject = null;
-//        try {
-//            // ´´½¨SSLContext¶ÔÏó£¬²¢Ê¹ÓÃÎÒÃÇÖ¸¶¨µÄĞÅÈÎ¹ÜÀíÆ÷³õÊ¼»¯
-//            TrustManager[] tm = { new MyX509TrustManager() };
-//            SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
-//            sslContext.init(null, tm, new java.security.SecureRandom());
-//            // ´ÓÉÏÊöSSLContext¶ÔÏóÖĞµÃµ½SSLSocketFactory¶ÔÏó
-//            SSLSocketFactory ssf = sslContext.getSocketFactory();
-//
-//            URL url = new URL(requestUrl);
-//            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-//            conn.setSSLSocketFactory(ssf);
-//
-//            conn.setDoOutput(true);
-//            conn.setDoInput(true);
-//            conn.setUseCaches(false);
-//            // ÉèÖÃÇëÇó·½Ê½£¨GET/POST£©
-//            conn.setRequestMethod(requestMethod);
-//
-//            // µ±outputStr²»ÎªnullÊ±ÏòÊä³öÁ÷Ğ´Êı¾İ
-//            if (null != outputStr) {
-//                OutputStream outputStream = conn.getOutputStream();
-//                // ×¢Òâ±àÂë¸ñÊ½
-//                outputStream.write(outputStr.getBytes("UTF-8"));
-//                outputStream.close();
-//            }
-//
-//            // ´ÓÊäÈëÁ÷¶ÁÈ¡·µ»ØÄÚÈİ
-//            InputStream inputStream = conn.getInputStream();
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            String str = null;
-//            StringBuffer buffer = new StringBuffer();
-//            while ((str = bufferedReader.readLine()) != null) {
-//                buffer.append(str);
-//            }
-//
-//            // ÊÍ·Å×ÊÔ´
-//            bufferedReader.close();
-//            inputStreamReader.close();
-//            inputStream.close();
-//            inputStream = null;
-//            conn.disconnect();
-//            jsonObject = JSONObject.fromObject(buffer.toString());
-//        } catch (ConnectException ce) {
-//            log.error("Á¬½Ó³¬Ê±£º{}", ce);
-//        } catch (Exception e) {
-//            log.error("httpsÇëÇóÒì³££º{}", e);
-//        }
-//        return jsonObject;
-//    }
+    public static JSONObject httpsRequest(String requestUrl, String requestMethod, String outputStr) {
+        JSONObject jsonObject = null;
+        try {
+            // åˆ›å»ºSSLContextå¯¹è±¡ï¼Œå¹¶ä½¿ç”¨æˆ‘ä»¬æŒ‡å®šçš„ä¿¡ä»»ç®¡ç†å™¨åˆå§‹åŒ–
+            TrustManager[] tm = { new MyX509TrustManager() };
+            SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
+            sslContext.init(null, tm, new java.security.SecureRandom());
+            // ä»ä¸Šè¿°SSLContextå¯¹è±¡ä¸­å¾—åˆ°SSLSocketFactoryå¯¹è±¡
+            SSLSocketFactory ssf = sslContext.getSocketFactory();
+
+            URL url = new URL(requestUrl);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setSSLSocketFactory(ssf);
+
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);
+            // è®¾ç½®è¯·æ±‚æ–¹å¼ï¼ˆGET/POSTï¼‰
+            conn.setRequestMethod(requestMethod);
+
+            // å½“outputSträ¸ä¸ºnullæ—¶å‘è¾“å‡ºæµå†™æ•°æ®
+            if (null != outputStr) {
+                OutputStream outputStream = conn.getOutputStream();
+                // æ³¨æ„ç¼–ç æ ¼å¼
+                outputStream.write(outputStr.getBytes("UTF-8"));
+                outputStream.close();
+            }
+
+            // ä»è¾“å…¥æµè¯»å–è¿”å›å†…å®¹
+            InputStream inputStream = conn.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String str = null;
+            StringBuffer buffer = new StringBuffer();
+            while ((str = bufferedReader.readLine()) != null) {
+                buffer.append(str);
+            }
+
+            // é‡Šæ”¾èµ„æº
+            bufferedReader.close();
+            inputStreamReader.close();
+            inputStream.close();
+            inputStream = null;
+            conn.disconnect();
+            jsonObject = JSONObject.fromObject(buffer.toString());
+        } catch (ConnectException ce) {
+            log.error("è¿æ¥è¶…æ—¶ï¼š{}", ce);
+        } catch (Exception e) {
+            log.error("httpsè¯·æ±‚å¼‚å¸¸ï¼š{}", e);
+        }
+        return jsonObject;
+    }
 
     /**
-     * »ñÈ¡½Ó¿Ú·ÃÎÊÆ¾Ö¤
+     * è·å–æ¥å£è®¿é—®å‡­è¯
      *
-     * @param appid Æ¾Ö¤
-     * @param appsecret ÃÜÔ¿
+     * @param appid å‡­è¯
+     * @param appsecret å¯†é’¥
      * @return
      */
     public static Token getToken(String appid, String appsecret) {
         Token token = null;
         String requestUrl = token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
-        // ·¢ÆğGETÇëÇó»ñÈ¡Æ¾Ö¤
-//        JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
-//
-//        if (null != jsonObject) {
-//            try {
-//                token = new Token();
-//                token.setAccessToken(jsonObject.getString("access_token"));
-//                token.setExpiresIn(jsonObject.getInt("expires_in"));
-//            } catch (JSONException e) {
-//                token = null;
-//                // »ñÈ¡tokenÊ§°Ü
-//                log.error("»ñÈ¡tokenÊ§°Ü errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
-//            }
-//        }
+        // å‘èµ·GETè¯·æ±‚è·å–å‡­è¯
+        JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
+
+        if (null != jsonObject) {
+            try {
+                token = new Token();
+                token.setAccessToken(jsonObject.getString("access_token"));
+                token.setExpiresIn(jsonObject.getInt("expires_in"));
+            } catch (JSONException e) {
+                token = null;
+                // è·å–tokenå¤±è´¥
+                log.error("è·å–tokenå¤±è´¥ errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+            }
+        }
         return token;
     }
 }

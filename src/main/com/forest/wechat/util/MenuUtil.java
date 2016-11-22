@@ -1,6 +1,7 @@
 package com.forest.wechat.util;
 
 import com.forest.wechat.menu.Menu;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,20 +27,20 @@ public class MenuUtil {
         boolean result = false;
         String url = menu_create_url.replace("ACCESS_TOKEN", accessToken);
         // 将菜单对象转换成json字符串
-//        String jsonMenu = JSONObject.fromObject(menu).toString();
-//        // 发起POST请求创建菜单
-//        JSONObject jsonObject = CommonUtil.httpsRequest(url, "POST", jsonMenu);
-//
-//        if (null != jsonObject) {
-//            int errorCode = jsonObject.getInt("errcode");
-//            String errorMsg = jsonObject.getString("errmsg");
-//            if (0 == errorCode) {
-//                result = true;
-//            } else {
-//                result = false;
-//                log.error("创建菜单失败 errcode:{} errmsg:{}", errorCode, errorMsg);
-//            }
-//        }
+        String jsonMenu = JSONObject.fromObject(menu).toString();
+        // 发起POST请求创建菜单
+        JSONObject jsonObject = CommonUtil.httpsRequest(url, "POST", jsonMenu);
+
+        if (null != jsonObject) {
+            int errorCode = jsonObject.getInt("errcode");
+            String errorMsg = jsonObject.getString("errmsg");
+            if (0 == errorCode) {
+                result = true;
+            } else {
+                result = false;
+                log.error("创建菜单失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+            }
+        }
 
         return result;
     }
@@ -54,11 +55,11 @@ public class MenuUtil {
         String result = null;
         String requestUrl = menu_get_url.replace("ACCESS_TOKEN", accessToken);
         // 发起GET请求查询菜单
-//        JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "GET", null);
-//
-//        if (null != jsonObject) {
-//            result = jsonObject.toString();
-//        }
+        JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "GET", null);
+
+        if (null != jsonObject) {
+            result = jsonObject.toString();
+        }
         return result;
     }
 
@@ -72,18 +73,18 @@ public class MenuUtil {
         boolean result = false;
         String requestUrl = menu_delete_url.replace("ACCESS_TOKEN", accessToken);
         // 发起GET请求删除菜单
-//        JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "GET", null);
-//
-//        if (null != jsonObject) {
-//            int errorCode = jsonObject.getInt("errcode");
-//            String errorMsg = jsonObject.getString("errmsg");
-//            if (0 == errorCode) {
-//                result = true;
-//            } else {
-//                result = false;
-//                log.error("删除菜单失败 errcode:{} errmsg:{}", errorCode, errorMsg);
-//            }
-//        }
+        JSONObject jsonObject = CommonUtil.httpsRequest(requestUrl, "GET", null);
+
+        if (null != jsonObject) {
+            int errorCode = jsonObject.getInt("errcode");
+            String errorMsg = jsonObject.getString("errmsg");
+            if (0 == errorCode) {
+                result = true;
+            } else {
+                result = false;
+                log.error("删除菜单失败 errcode:{} errmsg:{}", errorCode, errorMsg);
+            }
+        }
         return result;
     }
 }
